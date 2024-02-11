@@ -22,17 +22,7 @@ struct ContentView: View {
                     .padding()
 
                 
-                VStack (spacing: 10) {
-                    Image(systemName: "sun.snow.fill")
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 180, height: 180)
-                    Text("76°")
-                        .font(.system(size: 70, weight: .medium))
-                        .foregroundStyle(Color.white)
-                }
-                .padding(.bottom, 100)
+                WeatherView(imageName: "cloud.bolt.rain.fill", temperature: 69)
                 
                 HStack (spacing: 40){
                     WeatherDayView(dayOfWeek: "TUE", imageName: "cloud.sun.rain.fill", temperature: 74)
@@ -46,11 +36,7 @@ struct ContentView: View {
                 Button {
                     print("Tapped")
                 } label: {
-                    Text("Change Day Time")
-                        .frame(width: 280, height: 50)
-                        .background(Color.white)
-                        .font(.system(size: 20, weight: .bold, design: .default))
-                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    ButtonGeneric(buttonName: "Change Day Time")
                 }
                 
                 Spacer()
@@ -83,5 +69,39 @@ struct WeatherDayView: View {
                 .font(.system(size: 15, weight: .medium))
                 .foregroundStyle(Color.white)
         }
+    }
+}
+
+struct WeatherView: View {
+    
+    var imageName: String
+    var temperature: Int
+    
+    
+    var body: some View {
+        VStack (spacing: 10) {
+            Image(systemName: imageName)
+                .renderingMode(.original)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 180, height: 180)
+            Text("\(temperature)°")
+                .font(.system(size: 70, weight: .medium))
+                .foregroundStyle(Color.white)
+        }
+        .padding(.bottom, 100)
+    }
+}
+
+struct ButtonGeneric: View {
+    
+    var buttonName: String
+    
+    var body: some View {
+        Text(buttonName)
+            .frame(width: 280, height: 50)
+            .background(Color.white)
+            .font(.system(size: 20, weight: .bold, design: .default))
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
 }
